@@ -118,22 +118,52 @@ def generate_content(topic: str, model) -> str | None:
     """
     try:
         prompt = f"""
-        Tolong buatkan konten blog yang menarik dan informatif tentang topik: "{topic}"
-        
-        Format konten:
-        1. Judul yang catchy dan menarik (gunakan tag heading markdown H1)
-        2. Pendahuluan singkat
-        3. 3-5 poin utama (gunakan bullet points atau heading H3) dengan penjelasan detail
-        4. Kesimpulan yang kuat
-        5. Call to action yang persuasif
-        
-        Konten harus:
-        - Mudah dipahami, ringkas, dan jelas
-        - Informatif dan berguna
-        - Engaging untuk pembaca
-        - Panjang sekitar 200-300 kata
-        
-        Gunakan bahasa Indonesia yang baik dan benar dengan format Markdown.
+Kamu adalah asisten penulis konten blog yang SANGAT fokus pada topik
+dan tidak pernah keluar konteks.
+
+TUGAS UTAMA:
+- Buat satu konten blog yang relevan HANYA tentang topik berikut:
+  "{topic}"
+
+ATURAN KETAT:
+1. Dilarang membahas topik lain yang tidak berkaitan langsung dengan topik di atas.
+2. Jangan memberikan definisi atau penjelasan umum yang terlalu jauh dari topik.
+3. Setiap paragraf harus jelas koneksinya dengan topik tersebut.
+4. Jangan berimajinasi berlebihan, tetap logis dan realistis.
+5. Jika topik terlalu umum, sempitkan sendiri dengan cara yang masih relevan.
+6. Jangan menyebut bahwa kamu adalah model AI atau menjelaskan cara kerja AI.
+
+FORMAT KONTEN (WAJIB MENGGUNAKAN MARKDOWN):
+# Judul utama yang spesifik dan menarik (bukan clickbait berlebihan)
+
+Pendahuluan singkat (2–3 kalimat) yang:
+- Menjelaskan apa yang akan dibahas
+- Menyebut topik secara eksplisit
+
+## Poin Utama 1
+- Jelaskan dengan fokus pada topik
+- Beri contoh atau penjelasan konkret yang relevan
+
+## Poin Utama 2
+- Tetap terhubung dengan topik
+- Boleh memakai bullet list jika perlu
+
+## Poin Utama 3
+- Tambahkan insight yang masih dalam konteks
+- Jangan mengulang isi dari poin sebelumnya secara kosong
+
+Kesimpulan:
+- Ringkas ulang inti pembahasan
+- Jangan membuka topik baru
+
+Call to Action:
+- Buat ajakan yang masih BERKAITAN langsung dengan topik
+- Contoh: mengajak pembaca mencoba, menerapkan, atau mempelajari lebih lanjut hal yang sama.
+
+GAYA BAHASA:
+- Gunakan bahasa Indonesia yang baik, natural, dan mudah dipahami.
+- Hindari kalimat terlalu panjang.
+- Hindari istilah teknis yang tidak perlu; jika harus dipakai, jelaskan dengan singkat.
         """
 
         response = model.generate_content(prompt)
@@ -142,6 +172,7 @@ def generate_content(topic: str, model) -> str | None:
     except Exception as e:
         st.error(f"⚠️ Terjadi kesalahan saat generate konten: {e}")
         return None
+
 
 
 # =========================
